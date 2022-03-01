@@ -6,7 +6,6 @@
 </template>
 <script>
 import { defineAsyncComponent } from 'vue'
-import Fab from '../components/Fab.vue'
 export default {
     components:{
         Fab: defineAsyncComponent(() => import('../components/Fab.vue'))
