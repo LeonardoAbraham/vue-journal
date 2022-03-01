@@ -30,7 +30,9 @@
         ></textarea>
     </div>
 
-    <Fab/>
+    <Fab
+        icon="fa-save"
+    />
 
     <img 
         src="https://www.proandroid.com/wp-content/uploads/2017/04/Paisaje-HD.jpg" 
@@ -49,7 +51,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     textarea{
         font-size: 20px;
         border:none;
