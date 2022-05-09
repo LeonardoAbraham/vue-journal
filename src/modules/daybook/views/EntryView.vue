@@ -50,11 +50,12 @@
         @click="saveEntry"
     />
 
-    <!-- <img 
-        src="https://www.proandroid.com/wp-content/uploads/2017/04/Paisaje-HD.jpg" 
+    <img 
+        v-if="entry.picture &&  !localImage"
+        :src="entry.picture" 
         alt="entry-picture"
         class="img-thumbnail"
-    > -->
+    >
     <img 
         v-if="localImage"
         :src="localImage" 
@@ -69,6 +70,7 @@ import { mapGetters, mapActions } from 'vuex' //computed
 import Swal from 'sweetalert2'
 
 import getDayMonthYear from '../helpers/getDayMonthYear'
+import uploadImage from '../helpers/uploadImage'
 
 export default {
     props:{
@@ -130,6 +132,10 @@ export default {
             })
             Swal.showLoading()
 
+            const picture = await uploadImage(this.file)
+
+            this.entry.picture = picture
+
             if( this.entry.id ){
                 //Actulizar la entrada
                 await this.updateEntry(this.entry)
@@ -140,8 +146,9 @@ export default {
                 this.$router.push({ name:'entry', params: { id }  })
             }
 
-            Swal.fire('Guardando', 'Entrada registrada con éxito', 'success')
 
+            this.file = null
+            Swal.fire('Guardando', 'Entrada registrada con éxito', 'success')
 
         },
         async onDeleteEntry(){
@@ -183,7 +190,7 @@ export default {
         },
         onSelectImage(){
             this.$refs.imageSelector.click()
-        }
+        },
     },
     created(){
         //console.log(this.$router.params.id)
