@@ -8,8 +8,12 @@
             </div> 
             <div>
 
-                <input type="file"
+                <input 
+                    type="file"
                     @change="onSelectedImage"
+                    ref="imageSelector"
+                    v-show="false"
+                    accept="image/*"
                 >
 
                 <button
@@ -23,6 +27,7 @@
 
                 <button
                     class="btn btn-primary"
+                    @click="onSelectImage"
                 >
                     Subir foto
                     <i class="fa fa-upload"></i>
@@ -177,7 +182,7 @@ export default {
             fr.readAsDataURL(file)
         },
         onSelectImage(){
-            
+            this.$refs.imageSelector.click()
         }
     },
     created(){
