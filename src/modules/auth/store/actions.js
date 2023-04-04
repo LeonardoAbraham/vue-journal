@@ -9,7 +9,9 @@ export const createUser = async ({ commit }, user) => {
         const { idToken, refreshToken } = data
 
         await authApi.post(':update', { displayName: name, idToken })
-        //TODO: Mutation: loginUser
+        
+        delete user.password
+        commit('loginUser',{ user, idToken, refreshToken })
 
         return { ok: true }
 
